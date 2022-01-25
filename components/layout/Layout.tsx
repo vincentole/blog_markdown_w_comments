@@ -5,7 +5,6 @@ const Layout: React.FC = (props) => {
         <>
             <MainNav />
             <main>{props.children}</main>
-            <div className="spacer pt-12" />
         </>
     );
 };

@@ -10,7 +10,7 @@ const FeaturedPosts: React.FC<FeaturedPostsProps> = ({ posts }) => {
         <section>
             <div className='c-container'>
                 <h2>Featured Posts</h2>
-                <div className='spacer pt-8' />
+                <div className='spacer pt-8 ' />
                 <PostsGrid posts={posts} />
             </div>
         </section>

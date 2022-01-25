@@ -10,6 +10,7 @@ const DUMMY_POSTS: PostType[] = [
         summary:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum accusamus doloribus optio vitae inventore exercitationem beatae hic, at perferendis culpa.',
         date: '2022-02-01',
+        content: '## This is my first post content.',
     },
     {
         slug: 'getting-started-with-nextjs',
@@ -18,6 +19,7 @@ const DUMMY_POSTS: PostType[] = [
         summary:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum accusamus doloribus optio vitae inventore exercitationem beatae hic, at perferendis culpa.',
         date: '2022-02-01',
+        content: '## This is my first post content.',
     },
     {
         slug: 'getting-started-with-react',
@@ -26,6 +28,7 @@ const DUMMY_POSTS: PostType[] = [
         summary:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum accusamus doloribus optio vitae inventore exercitationem beatae hic, at perferendis culpa.',
         date: '2022-02-01',
+        content: '## This is my first post content.',
     },
     {
         slug: 'getting-started-with-typescript',
@@ -34,6 +37,7 @@ const DUMMY_POSTS: PostType[] = [
         summary:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum accusamus doloribus optio vitae inventore exercitationem beatae hic, at perferendis culpa.',
         date: '2022-02-01',
+        content: '## This is my first post content.',
     },
 ];
 
@@ -42,6 +46,7 @@ const AllPostsPage: NextPage = () => {
         <div className='c-container'>
             <div className='spacer pt-12' />
             <AllPosts posts={DUMMY_POSTS} />
+            <div className='spacer pt-12' />
         </div>
     );
 };

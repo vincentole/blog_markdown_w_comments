@@ -5,9 +5,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                'sans': ['Roboto', ...fontFamily.sans],
+                sans: ['Roboto', ...fontFamily.sans],
             },
         },
     },
-    plugins: [],
+    plugins: [require('@tailwindcss/typography')],
 };

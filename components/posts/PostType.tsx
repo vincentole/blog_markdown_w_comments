@@ -4,6 +4,7 @@ type PostType = {
     summary: string;
     date: string;
     slug: string;
+    content: string;
 };
 
 export default PostType;
