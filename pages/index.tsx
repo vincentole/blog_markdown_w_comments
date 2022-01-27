@@ -8,7 +8,7 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ fe
     return (
         <>
             <Head>
-                <title>vincentole's Blog</title>
+                <title>vincentole&apos;s Blog</title>
                 <meta name='description' content='I post about programming and web development.' />
             </Head>
             <Hero />
