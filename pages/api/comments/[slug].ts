@@ -14,9 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     let client: MongoClient;
 
     try {
-        client = await MongoClient.connect(
-            'mongodb+srv://vincentole:sVBgtT2a2AmwHE6@simpleblogwcomments.l8c0s.mongodb.net/comments?retryWrites=true&w=majority',
-        );
+        client = await MongoClient.connect(String(process.env.DB_COMMENTS_API));
     } catch (error) {
         res.status(500).json({ message: 'Sending failed. Could not connect to database.' });
         return;

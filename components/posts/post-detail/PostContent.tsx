@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Comments from './Comments';
-import CommentFetchedType from './CommentFetchedType';
+import { CommentsFetchedType } from './CommentFetchedType';
 
 type PostContentProps = {
     post: PostType;
-    comments: CommentFetchedType[];
+    comments: CommentsFetchedType;
 };
 
 const PostContent: React.FC<PostContentProps> = ({ post, comments }) => {

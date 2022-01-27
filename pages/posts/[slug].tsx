@@ -9,8 +9,9 @@ import { ParsedUrlQuery } from 'querystring';
 import PostContent from '../../components/posts/post-detail/PostContent';
 import { getPostData, getPostsFiles } from '../../lib/posts-util';
 import { MongoClient } from 'mongodb';
-import CommentDBType from '../../components/posts/post-detail/CommentDBType';
-import CommentFetchedType from '../../components/posts/post-detail/CommentFetchedType';
+import CommentFetchedType, {
+    CommentsFetchedType,
+} from '../../components/posts/post-detail/CommentFetchedType';
 
 const PostDetailsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     postData,
@@ -47,12 +48,10 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     const postData = getPostData(slug);
 
     let client: MongoClient;
-    let comments: CommentFetchedType[] = [];
+    let comments: CommentsFetchedType = [];
 
     try {
-        client = await MongoClient.connect(
-            'mongodb+srv://vincentole:sVBgtT2a2AmwHE6@simpleblogwcomments.l8c0s.mongodb.net/comments?retryWrites=true&w=majority',
-        );
+        client = await MongoClient.connect(String(process.env.DB_COMMENTS_API));
 
         const db = client.db();
 
@@ -64,11 +63,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
             .map((d) => Object.assign(d, { _id: d._id.toString() }))
             .toArray()) as unknown as CommentFetchedType[];
     } catch (error) {
-        comments = [];
-        throw new Error('Fetching comments failed.');
+        comments = 'error';
+        console.log('Fetching comments failed.');
     }
 
-    return { props: { postData, comments }, revalidate: 1 };
+    return { props: { postData, comments }, revalidate: 600 };
 };
 
 export default PostDetailsPage;

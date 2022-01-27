@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import CommentDBType from './CommentDBType';
-import CommentFetchedType from './CommentFetchedType';
+import { CommentsFetchedType } from './CommentFetchedType';
 import CommentFormType from './CommentFormType';
 import CommentItem from './CommentItem';
 
@@ -22,7 +21,7 @@ const sendData = async (comment: CommentFormType, slug: string) => {
 
 type CommentsProps = {
     slug: string;
-    comments: CommentFetchedType[];
+    comments: CommentsFetchedType;
 };
 
 const Comments: React.FC<CommentsProps> = ({ slug, comments }) => {
@@ -31,10 +30,13 @@ const Comments: React.FC<CommentsProps> = ({ slug, comments }) => {
     const [requestStatus, setRequestStatus] = useState<RequestStatusType>(null);
     const [requestError, setRequestError] = useState<any>(null);
 
-    const commentList =
-        comments.length > 0
-            ? comments.map((comment) => <CommentItem key={comment._id} comment={comment} />)
-            : 'No comments yet';
+    let commentList: JSX.Element[] | string = '';
+    if (comments === 'error') commentList = 'Fetching comments failed.';
+    else if (comments && comments.length === 0) commentList = 'No comments yet.';
+    else if (comments && comments.length > 0)
+        commentList = comments.map((comment) => (
+            <CommentItem key={comment._id} comment={comment} />
+        ));
 
     useEffect(() => {
         if (requestStatus === 'success' || requestStatus === 'error') {
