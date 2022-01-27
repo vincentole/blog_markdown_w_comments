@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
-type MessageDBType = { id?: ObjectId | undefined; email: string; name: string; message: string };
+type MessageDBType = { _id?: ObjectId | undefined; email: string; name: string; message: string };
 
 export default MessageDBType;

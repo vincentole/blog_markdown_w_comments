@@ -29,7 +29,7 @@ const ContactForm = () => {
             const timer = setTimeout(() => {
                 setRequestStatus(null);
                 setRequestError(null);
-            }, 3000)
+            }, 3000);
 
             return () => clearTimeout(timer);
         }
@@ -58,17 +58,27 @@ const ContactForm = () => {
             setRequestError(e.message);
             setRequestStatus('error');
         }
-
-        
     };
 
     let notification: JSX.Element;
     if (requestStatus === 'pending') {
-        notification = <div className='text-blue-500'>Sending Message...</div>;
+        notification = (
+            <div className='text-blue-500' aria-live='polite'>
+                Sending Message...
+            </div>
+        );
     } else if (requestStatus === 'error') {
-        notification = <div className='text-red-500'>{requestError}</div>;
+        notification = (
+            <div className='text-red-500' aria-live='polite'>
+                {requestError}
+            </div>
+        );
     } else if (requestStatus === 'success') {
-        notification = <div className='text-green-500'>Message sent successfully.</div>;
+        notification = (
+            <div className='text-green-500' aria-live='polite'>
+                Message sent successfully.
+            </div>
+        );
     } else notification = <div></div>;
 
     return (
@@ -115,7 +125,7 @@ const ContactForm = () => {
                         ></textarea>
                     </div>
                     <div className='flex justify-between items-center'>
-                        <div className=''>{notification}</div>
+                        <div>{notification}</div>
 
                         <button
                             className='w-36 border border-zinc-900 bg-zinc-900 text-white px-4 py-2'

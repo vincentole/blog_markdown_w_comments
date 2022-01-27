@@ -1,8 +1,17 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import ContactForm from '../components/contact/contactForm';
 
 const ContactPage: NextPage = () => {
-    return <ContactForm />;
+    return (
+        <>
+            <Head>
+                <title>Contact Me</title>
+                <meta name='description' content='Send me your messages.' />
+            </Head>
+            <ContactForm />
+        </>
+    );
 };
 
 export default ContactPage;

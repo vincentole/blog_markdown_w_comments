@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import Logo from './Logo';
 
-const MainNav = () => {
+type MainNavProps = {
+    className?: string;
+}
+
+const MainNav: React.FC<MainNavProps> = ({className}) => {
     return (
-        <header className='shadow'>
+        <header className={`shadow ${className}`}>
             <div className='spacer pt-4' />
             <div className='c-container flex justify-between items-center'>
                 <Link href='/'>

@@ -4,6 +4,7 @@ import type {
     InferGetStaticPropsType,
     NextPage,
 } from 'next';
+import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 import PostContent from '../../components/posts/post-detail/PostContent';
 import { getPostData, getPostsFiles } from '../../lib/posts-util';
@@ -12,11 +13,17 @@ const PostDetailsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> 
     postData,
 }) => {
     return (
-        <div className='c-container'>
-            <div className='spacer pt-12' />
-            <PostContent post={postData} />
-            <div className='spacer pt-12' />
-        </div>
+        <>
+            <Head>
+                <title>{postData.title}</title>
+                <meta name='description' content={postData.summary} />
+            </Head>
+            <div className='c-container'>
+                <div className='spacer pt-12' />
+                <PostContent post={postData} />
+                <div className='spacer pt-12' />
+            </div>
+        </>
     );
 };
 
