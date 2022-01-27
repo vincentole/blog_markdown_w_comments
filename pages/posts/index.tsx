@@ -2,7 +2,6 @@ import type { InferGetStaticPropsType, NextPage } from 'next';
 import AllPosts from '../../components/posts/AllPosts';
 import { getAllPosts } from '../../lib/posts-util';
 
-
 const AllPostsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ allPosts }) => {
     return (
         <div className='c-container'>

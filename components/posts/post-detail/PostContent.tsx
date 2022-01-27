@@ -40,7 +40,6 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
         code(code: any) {
             const { className, children } = code;
             const language = className ? className.split('-')[1] : 'sh';
-            console.log(language);
             return (
                 <SyntaxHighlighter style={vscDarkPlus} language={language}>
                     {children}

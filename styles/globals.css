@@ -4,20 +4,29 @@
 
 @layer base {
     body {
-        @apply font-sans text-zinc-900
+        @apply font-sans text-zinc-900;
     }
 
     h1 {
-        @apply text-2xl
+        @apply text-2xl;
     }
-    
+
     h2 {
         @apply text-4xl;
+    }
+
+    input,
+    textarea {
+        @apply border border-zinc-900 px-2 py-1;
+    }
+
+    label {
+        @apply text-zinc-700 text-sm
     }
 }
 
 @layer components {
     .c-container {
-        @apply max-w-5xl px-8;
+        @apply max-w-5xl px-8 mx-auto;
     }
 }

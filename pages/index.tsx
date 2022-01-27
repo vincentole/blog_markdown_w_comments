@@ -16,7 +16,6 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ fe
 
 export const getStaticProps = async () => {
     const featuredPosts = getFeaturedPosts();
-    console.log(featuredPosts);
     return { props: { featuredPosts } };
 };
 
