@@ -6,36 +6,33 @@ import CommentDBType from '../../../components/posts/post-detail/CommentDBType';
 type Data = {
     message: string;
     newComment?: CommentDBType;
+    comments?: CommentDBType[];
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const slug = req.query.slug as string;
+    let client: MongoClient;
+
+    try {
+        client = await MongoClient.connect(
+            'mongodb+srv://vincentole:sVBgtT2a2AmwHE6@simpleblogwcomments.l8c0s.mongodb.net/comments?retryWrites=true&w=majority',
+        );
+    } catch (error) {
+        res.status(500).json({ message: 'Sending failed. Could not connect to database.' });
+        return;
+    }
 
     if (req.method === 'POST') {
         const { name, comment } = req.body;
 
         // Input validation
-        if (!name ||
-            name.trim() === '' ||
-            !comment ||
-            comment.trim() === ''
-        ) {
+        if (!name || name.trim() === '' || !comment || comment.trim() === '') {
             res.status(422).json({ message: 'Invalid input.' });
             return;
         }
 
         // Store inputs in db
         const newComment: CommentDBType = { name, comment };
-        let client: MongoClient;
-
-        try {
-            client = await MongoClient.connect(
-                'mongodb+srv://vincentole:sVBgtT2a2AmwHE6@simpleblogwcomments.l8c0s.mongodb.net/comments?retryWrites=true&w=majority',
-            );
-        } catch (error) {
-            res.status(500).json({ message: 'Sending failed. Could not connect to database.' });
-            return;
-        }
 
         const db = client.db();
 
@@ -53,6 +50,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     if (req.method === 'GET') {
-        
+        const db = client.db();
+        let documents: CommentDBType[] | null = null;
+
+        try {
+            documents = (await db
+                .collection(slug)
+                .find()
+                .sort({ _id: -1 })
+                .limit(10)
+                .toArray()) as CommentDBType[];
+        } catch (e: any) {
+            client.close();
+            res.status(500).json({ message: 'Fetching comments failed.' });
+            return;
+        }
+
+        client.close();
+        res.status(200).json({
+            message: 'Successfully fetched comments.',
+            comments: documents,
+        });
     }
 }

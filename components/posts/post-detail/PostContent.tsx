@@ -3,18 +3,16 @@ import PostHeader from './PostHeader';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-    atomDark,
-    a11yDark,
-    materialLight,
-    vscDarkPlus,
-} from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import Comments from './Comments';
+import CommentFetchedType from './CommentFetchedType';
 
 type PostContentProps = {
     post: PostType;
+    comments: CommentFetchedType[];
 };
 
-const PostContent: React.FC<PostContentProps> = ({ post }) => {
+const PostContent: React.FC<PostContentProps> = ({ post, comments }) => {
     const imagePath = `/img/posts/${post.slug}/${post.image}`;
 
     const customRenderers = {
@@ -58,6 +56,14 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
             <ReactMarkdown className='prose prose-zinc mx-auto' components={customRenderers}>
                 {post.content}
             </ReactMarkdown>
+            <div className='spacer pt-20' />
+            <div className='border-t border-zinc-200' />
+            <div className='spacer pt-12' />
+            <section>
+                <h2>Comments</h2>
+                <div className='spacer pt-8' />
+                <Comments slug={post.slug} comments={comments} />
+            </section>
             <div className='spacer pt-8' />
         </article>
     );
