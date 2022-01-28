@@ -66,7 +66,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
         comments = 'error';
         console.log('Fetching comments failed.');
     }
-
+    console.log('-------------');
+    console.log('Static Props');
     return { props: { postData, comments }, revalidate: 600 };
 };
 

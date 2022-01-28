@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import { CommentsFetchedType } from './CommentFetchedType';
 import CommentFormType from './CommentFormType';

@@ -47,27 +47,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.status(201).json({ message: 'Comment sent successfully.', newComment: newComment });
     }
 
-    if (req.method === 'GET') {
-        const db = client.db();
-        let documents: CommentDBType[] | null = null;
+    // if (req.method === 'GET') {
+    //     const db = client.db();
+    //     let documents: CommentDBType[] | null = null;
 
-        try {
-            documents = (await db
-                .collection(slug)
-                .find()
-                .sort({ _id: -1 })
-                .limit(10)
-                .toArray()) as CommentDBType[];
-        } catch (e: any) {
-            client.close();
-            res.status(500).json({ message: 'Fetching comments failed.' });
-            return;
-        }
+    //     try {
+    //         documents = (await db
+    //             .collection(slug)
+    //             .find()
+    //             .sort({ _id: -1 })
+    //             .limit(10)
+    //             .toArray()) as CommentDBType[];
+    //     } catch (e: any) {
+    //         client.close();
+    //         res.status(500).json({ message: 'Fetching comments failed.' });
+    //         return;
+    //     }
 
-        client.close();
-        res.status(200).json({
-            message: 'Successfully fetched comments.',
-            comments: documents,
-        });
-    }
+    //     client.close();
+    //     res.status(200).json({
+    //         message: 'Successfully fetched comments.',
+    //         comments: documents,
+    //     });
+    // }
 }
